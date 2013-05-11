@@ -24,8 +24,8 @@ shinyUI(pageWithSidebar(
     sliderInput("k", 
                 "Number of random variables sampled from parent distribution:", 
                 value = 10,
-                min = 2, 
-                max = 400)
+                min = 1, 
+                max = 100)
   ),
   
   mainPanel(
