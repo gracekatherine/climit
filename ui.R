@@ -25,8 +25,9 @@ shinyUI(pageWithSidebar(
                 "Number of random variables sampled from parent distribution:", 
                 value = 10,
                 min = 1, 
-                max = 100)
-  ),
+                max = 100),
+    br(),
+    helpText(a(href="https://github.com/tgouhier/climit", target="_blank", "View code"))),
   
   mainPanel(
     plotOutput("plot", height="900px")
