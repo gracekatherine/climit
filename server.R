@@ -44,27 +44,28 @@ shinyServer(function(input, output) {
                       
     par(mfrow=c(2,1))
     pdens=density(pdist)
-    phist=hist(pdist, freq=FALSE, plot=FALSE)
-    hist(pdist, main=paste(n, " observations from ", distname, sep=""), 
-         xlab="Values", freq=FALSE, ylim=c(0, max(pdens$y, phist$density)))
-    lines(pdens, col="red", lwd=2)
-    abline(v=obs$pdist[1], col="blue", lwd=2, lty=2)
-    abline(v=expect[1], col="red", lwd=2, lty=2)
-    legend(x="topright", col=c("blue", "red"), lwd=2, lty=2, 
-           legend=c("Observed", "Expected"))
+    phist=hist(pdist, plot=FALSE)
+    hist(pdist, main=paste(n, " observations from ", distname, sep=""), col="red",
+         xlab="Values (X)", freq=FALSE, ylim=c(0, max(pdens$y, phist$density)))
+    #lines(pdens, col="red", lwd=2)
+    #abline(v=obs$pdist[1], col="blue", lwd=2, lty=2)
+    #abline(v=expect[1], col="red", lwd=2, lty=2)
+    #legend(x="topright", col=c("blue", "red"), lwd=2, lty=2, 
+    #       legend=c("Observed", "Expected"))
     box()
 
     ndens=density(ndist)
-    nhist=hist(ndist, freq=FALSE, plot=FALSE)
+    nhist=hist(ndist, plot=FALSE)
     hist(ndist, main=paste("Distribution of mean values from ", k, 
-                           " random variables each\nconsisting of ", n, 
-                           " observations from ", distname, sep=""), 
-         xlab="Values", freq=FALSE, ylim=c(0, max(ndens$y, nhist$density)))
-    lines(ndens, col="red", lwd=2)
-    abline(v=obs$ndist[1], col="blue", lwd=2, lty=2)
-    abline(v=expect[1], col="red",  lwd=2, lty=2)
-    legend(x="topright", col=c("blue", "red"), lwd=2, lty=2, 
-           legend=c("Observed", "Expected"))
+                           " random samples each\nconsisting of ", n, 
+                           " observations from ", distname, sep=""), col="red",
+         xlab=expression(paste("Sample means (", bar(X), ")")), 
+         freq=FALSE, ylim=c(0, max(ndens$y, nhist$density)))
+    lines(ndens, col="black", lwd=3)
+    #abline(v=obs$ndist[1], col="blue", lwd=2, lty=2)
+    #abline(v=expect[1], col="red",  lwd=2, lty=2)
+    #legend(x="topright", col=c("blue", "red"), lwd=2, lty=2, 
+    #       legend=c("Observed", "Expected"))
     box()
   
   })
