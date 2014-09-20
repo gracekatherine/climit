@@ -5,7 +5,7 @@ shinyUI(pageWithSidebar(
   headerPanel("Central Limit Theorem"),
   
   sidebarPanel(
-    p("This simulation demonstrates the central limit theorem, one of the core tenets of modern statistical theory. The central limit theorem basically states that regardless of the underlying parent distribution of a random variable, the mean (or sum) obtained by repeatedly sampling the parent distribution will be normally distributed. This powerful result applies as long as the random variable follows a distribution with clearly defined moments."),
+    p("This simulation demonstrates the central limit theorem, one of the core tenets of modern statistical theory. The central limit theorem basically states that regardless of the underlying parent distribution of a random variable, the mean (or sum) obtained by repeatedly sampling the parent distribution will be normally distributed. This powerful result applies as long as the random variable follows a distribution with clearly defined moments and the observations are independently and identically distributed (iid)."),
     p("You can verify this for yourself by using the controls below to select a different parent distribution for a random variable and see the distribution of its sample means."),
     h4("Simulation parameters:"),
     radioButtons("dist", "Parent distribution:",
