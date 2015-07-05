@@ -1,5 +1,10 @@
 library(shiny)
 
+.cb <- c(black = "#000000", grey = "#999999", orange = "#E69F00",
+         turquoise = "#56B4E9", green = "#009E73", yellow = "#F0E442",
+         blue = "#0072B2", red = "#D55E00", pink = "#CC79A7")
+.internal <- list(mar = c(4, 4, 3, 1), tck = 0.01, mgp = c(1.5, 0.2, 0), las = 1)
+
 shinyServer(function(input, output) {
   
   data <- reactive({      
@@ -42,10 +47,12 @@ shinyServer(function(input, output) {
     obs <- data.frame(pdist=c(mean(pdist), var(pdist)), ndist=c(mean(ndist), 
                                                                 var(ndist)))
                       
-    par(mfrow=c(2,1))
+    .internal$mfrow = c(2, 1)
+    par(.internal)
     pdens=density(pdist)
     phist=hist(pdist, plot=FALSE)
-    hist(pdist, main=paste(n, " observations from ", distname, sep=""), col="red",
+    hist(pdist, main=paste(n, " observations from ", distname, sep=""), 
+         col=.cb["red"],
          xlab="Values (X)", freq=FALSE, ylim=c(0, max(pdens$y, phist$density)))
     #lines(pdens, col="red", lwd=2)
     #abline(v=obs$pdist[1], col="blue", lwd=2, lty=2)
@@ -56,9 +63,10 @@ shinyServer(function(input, output) {
 
     ndens=density(ndist)
     nhist=hist(ndist, plot=FALSE)
-    hist(ndist, main=paste("Distribution of mean values from ", k, 
-                           " random samples each\nconsisting of ", n, 
-                           " observations from ", distname, sep=""), col="red",
+    hist(ndist, main=paste("Distribution of means from ", k, 
+                           " random samples each consisting\nof ", n, 
+                           " observations from ", distname, sep=""), 
+         col=.cb["red"],
          xlab=expression(paste("Sample means (", bar(X), ")")), 
          freq=FALSE, ylim=c(0, max(ndens$y, nhist$density)))
     lines(ndens, col="black", lwd=3)
